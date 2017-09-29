@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="LlabdaqEntities">
+    <EntitySetMapping Name="REQ_PANELS">
+      <EntityTypeMapping TypeName="Model.REQ_PANELS">
+        <MappingFragment StoreEntitySet="REQ_PANELS">
+          <ScalarProperty Name="RP_ID" ColumnName="RP_ID" />
+          <ScalarProperty Name="DEL_FLAG" ColumnName="DEL_FLAG" />
+          <ScalarProperty Name="APPROVAL_REQUIRED" ColumnName="APPROVAL_REQUIRED" />
+          <ScalarProperty Name="ACC_ID" ColumnName="ACC_ID" />
+          <ScalarProperty Name="SG_ID" ColumnName="SG_ID" />
+          <ScalarProperty Name="PANEL_ID" ColumnName="PANEL_ID" />
+          <ScalarProperty Name="DX1" ColumnName="DX1" />
+          <ScalarProperty Name="DX2" ColumnName="DX2" />
+          <ScalarProperty Name="DX3" ColumnName="DX3" />
+          <ScalarProperty Name="DX4" ColumnName="DX4" />
+          <ScalarProperty Name="LOC_ID" ColumnName="LOC_ID" />
+          <ScalarProperty Name="RUN_DATE" ColumnName="RUN_DATE" />
+          <ScalarProperty Name="RUN_BY" ColumnName="RUN_BY" />
+          <ScalarProperty Name="UPLOADED" ColumnName="UPLOADED" />
+          <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
+          <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+          <ScalarProperty Name="DELETED_DATE" ColumnName="DELETED_DATE" />
+          <ScalarProperty Name="DELETED_BY" ColumnName="DELETED_BY" />
+          <ScalarProperty Name="NOTES" ColumnName="NOTES" />
+          <ScalarProperty Name="APPROVED_DATE" ColumnName="APPROVED_DATE" />
+          <ScalarProperty Name="APPROVED_BY" ColumnName="APPROVED_BY" />
+          <ScalarProperty Name="EXTERNAL_NO" ColumnName="EXTERNAL_NO" />
+          <ScalarProperty Name="FAIL_TYPE" ColumnName="FAIL_TYPE" />
+          <ScalarProperty Name="LD_REFLEX_RP_ID" ColumnName="LD_REFLEX_RP_ID" />
+          <ScalarProperty Name="STAT" ColumnName="STAT" />
+          <ScalarProperty Name="DELETE_REASON_NOTE" ColumnName="DELETE_REASON_NOTE" />
+          <ScalarProperty Name="DX5" ColumnName="DX5" />
+          <ScalarProperty Name="DX6" ColumnName="DX6" />
+          <ScalarProperty Name="DX7" ColumnName="DX7" />
+          <ScalarProperty Name="DX8" ColumnName="DX8" />
+          <ScalarProperty Name="ACCEPTED_BY" ColumnName="ACCEPTED_BY" />
+          <ScalarProperty Name="ACCEPTED_BY_ID" ColumnName="ACCEPTED_BY_ID" />
+          <ScalarProperty Name="RUN_BY_ID" ColumnName="RUN_BY_ID" />
+          <ScalarProperty Name="UNIT_COUNT" ColumnName="UNIT_COUNT" />
+          <ScalarProperty Name="APPROVAL_REASON" ColumnName="APPROVAL_REASON" />
+          <ScalarProperty Name="INTERNAL_NOTES" ColumnName="INTERNAL_NOTES" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RL_REQUISITIONS">
+      <EntityTypeMapping TypeName="Model.RL_REQUISITIONS">
+        <MappingFragment StoreEntitySet="RL_REQUISITIONS">
+          <ScalarProperty Name="ACC_ID" ColumnName="ACC_ID" />
+          <ScalarProperty Name="RL_ID" ColumnName="RL_ID" />
+          <ScalarProperty Name="BILL_TYPE" ColumnName="BILL_TYPE" />
+          <ScalarProperty Name="CLIENT_ID" ColumnName="CLIENT_ID" />
+          <ScalarProperty Name="IMPORT_NOTES" ColumnName="IMPORT_NOTES" />
+          <ScalarProperty Name="REMOTE_DRAW" ColumnName="REMOTE_DRAW" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

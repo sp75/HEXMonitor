@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="LlabdaqEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="REQ_PANELS" EntityType="Model.REQ_PANELS" />
+    <EntitySet Name="RL_REQUISITIONS" EntityType="Model.RL_REQUISITIONS" />
+  </EntityContainer>
+  <EntityType Name="REQ_PANELS">
+    <Key>
+      <PropertyRef Name="RP_ID" />
+      <PropertyRef Name="DX1" />
+      <PropertyRef Name="DX2" />
+      <PropertyRef Name="DX3" />
+      <PropertyRef Name="DX4" />
+      <PropertyRef Name="DX5" />
+      <PropertyRef Name="DX6" />
+      <PropertyRef Name="DX7" />
+      <PropertyRef Name="DX8" />
+      <PropertyRef Name="UNIT_COUNT" />
+    </Key>
+    <Property Name="RP_ID" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+    <Property Name="DEL_FLAG" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="APPROVAL_REQUIRED" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="ACC_ID" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="SG_ID" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="PANEL_ID" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="DX1" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="DX2" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="DX3" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="DX4" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="LOC_ID" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="RUN_DATE" Type="DateTime" Precision="0" />
+    <Property Name="RUN_BY" Type="String" MaxLength="3" Unicode="false" FixedLength="false" />
+    <Property Name="UPLOADED" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="CREATED_DATE" Type="DateTime" Precision="0" />
+    <Property Name="CREATED_BY" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="DELETED_DATE" Type="DateTime" Precision="0" />
+    <Property Name="DELETED_BY" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="NOTES" Type="String" MaxLength="4000" Unicode="false" FixedLength="false" />
+    <Property Name="APPROVED_DATE" Type="DateTime" Precision="0" />
+    <Property Name="APPROVED_BY" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="EXTERNAL_NO" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="FAIL_TYPE" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="LD_REFLEX_RP_ID" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="STAT" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="DELETE_REASON_NOTE" Type="String" MaxLength="4000" Unicode="false" FixedLength="false" />
+    <Property Name="DX5" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="DX6" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="DX7" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="DX8" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="ACCEPTED_BY" Type="String" MaxLength="3" Unicode="false" FixedLength="false" />
+    <Property Name="ACCEPTED_BY_ID" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="RUN_BY_ID" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="UNIT_COUNT" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+    <Property Name="APPROVAL_REASON" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="INTERNAL_NOTES" Type="String" MaxLength="4000" Unicode="false" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="RL_REQUISITIONS">
+    <Key>
+      <PropertyRef Name="ACC_ID" />
+      <PropertyRef Name="RL_ID" />
+    </Key>
+    <Property Name="ACC_ID" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+    <Property Name="RL_ID" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+    <Property Name="BILL_TYPE" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="CLIENT_ID" Type="String" MaxLength="35" Unicode="false" FixedLength="false" />
+    <Property Name="IMPORT_NOTES" Type="String" MaxLength="4000" Unicode="false" FixedLength="false" />
+    <Property Name="REMOTE_DRAW" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+  </EntityType>
+</Schema>

@@ -1,0 +1,17 @@
+C:\Projects\HEXMonitor\HEXMonitor\bin\Debug\HEXMonitor.exe.config
+C:\Projects\HEXMonitor\HEXMonitor\bin\Debug\HEXMonitor.exe
+C:\Projects\HEXMonitor\HEXMonitor\bin\Debug\HEXMonitor.pdb
+C:\Projects\HEXMonitor\HEXMonitor\obj\Debug\HEXMonitor.csprojResolveAssemblyReference.cache
+C:\Projects\HEXMonitor\HEXMonitor\obj\Debug\HEXMonitor.Form1.resources
+C:\Projects\HEXMonitor\HEXMonitor\obj\Debug\HEXMonitor.Properties.Resources.resources
+C:\Projects\HEXMonitor\HEXMonitor\obj\Debug\HEXMonitor.csproj.GenerateResource.Cache
+C:\Projects\HEXMonitor\HEXMonitor\obj\Debug\HEXMonitor.exe
+C:\Projects\HEXMonitor\HEXMonitor\obj\Debug\HEXMonitor.pdb
+C:\Projects\HEXMonitor\HEXMonitor\bin\Debug\EntityFramework.dll
+C:\Projects\HEXMonitor\HEXMonitor\bin\Debug\EntityFramework.xml
+C:\Projects\HEXMonitor\HEXMonitor\bin\Debug\Labdaq.dll
+C:\Projects\HEXMonitor\HEXMonitor\bin\Debug\Labdaq.pdb
+C:\Projects\HEXMonitor\HEXMonitor\bin\Debug\DocumentFormat.OpenXml.dll
+C:\Projects\HEXMonitor\HEXMonitor\bin\Debug\DocumentFormat.OpenXml.Extensions.dll
+C:\Projects\HEXMonitor\HEXMonitor\bin\Debug\DocumentFormat.OpenXml.ReportBuilder.dll
+C:\Projects\HEXMonitor\HEXMonitor\bin\Debug\NCalc.dll

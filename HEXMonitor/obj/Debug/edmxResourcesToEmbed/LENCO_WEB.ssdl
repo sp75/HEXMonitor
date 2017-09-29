@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LENCO_WEBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="HEX_Panels">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="rp_id" Type="bigint" Nullable="false" />
+    <Property Name="acc_id" Type="bigint" />
+    <Property Name="panel_name" Type="nvarchar(max)" />
+    <Property Name="requisitions_id" Type="int" />
+    <Property Name="panel_id" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="HEX_Requisitions">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="acc_id" Type="bigint" Nullable="false" />
+    <Property Name="date_processed" Type="datetime" />
+    <Property Name="patient_last_name" Type="nvarchar" MaxLength="100" />
+    <Property Name="patient_first_name" Type="nvarchar" MaxLength="100" />
+    <Property Name="requisition_date" Type="datetime" />
+    <Property Name="hl7_data" Type="nvarchar(max)" />
+  </EntityType>
+  <Association Name="FK_HEX_Panels_HEX_Requisitions">
+    <End Role="HEX_Requisitions" Type="Self.HEX_Requisitions" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="HEX_Panels" Type="Self.HEX_Panels" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HEX_Requisitions">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="HEX_Panels">
+        <PropertyRef Name="requisitions_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="LENCO_WEBModelStoreContainer">
+    <EntitySet Name="HEX_Panels" EntityType="Self.HEX_Panels" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HEX_Requisitions" EntityType="Self.HEX_Requisitions" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_HEX_Panels_HEX_Requisitions" Association="Self.FK_HEX_Panels_HEX_Requisitions">
+      <End Role="HEX_Requisitions" EntitySet="HEX_Requisitions" />
+      <End Role="HEX_Panels" EntitySet="HEX_Panels" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model.Store" Alias="Self" Provider="Oracle.DataAccess.Client" ProviderManifestToken="11.2" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="ModelStoreContainer">
+    <EntitySet Name="REQ_PANELS" EntityType="Model.Store.REQ_PANELS" store:Type="Views" store:Schema="LENCO" store:Name="REQ_PANELS">
+      <DefiningQuery>SELECT 
+      "REQ_PANELS"."RP_ID" AS "RP_ID", 
+      "REQ_PANELS"."DEL_FLAG" AS "DEL_FLAG", 
+      "REQ_PANELS"."APPROVAL_REQUIRED" AS "APPROVAL_REQUIRED", 
+      "REQ_PANELS"."ACC_ID" AS "ACC_ID", 
+      "REQ_PANELS"."SG_ID" AS "SG_ID", 
+      "REQ_PANELS"."PANEL_ID" AS "PANEL_ID", 
+      "REQ_PANELS"."DX1" AS "DX1", 
+      "REQ_PANELS"."DX2" AS "DX2", 
+      "REQ_PANELS"."DX3" AS "DX3", 
+      "REQ_PANELS"."DX4" AS "DX4", 
+      "REQ_PANELS"."LOC_ID" AS "LOC_ID", 
+      "REQ_PANELS"."RUN_DATE" AS "RUN_DATE", 
+      "REQ_PANELS"."RUN_BY" AS "RUN_BY", 
+      "REQ_PANELS"."UPLOADED" AS "UPLOADED", 
+      "REQ_PANELS"."CREATED_DATE" AS "CREATED_DATE", 
+      "REQ_PANELS"."CREATED_BY" AS "CREATED_BY", 
+      "REQ_PANELS"."DELETED_DATE" AS "DELETED_DATE", 
+      "REQ_PANELS"."DELETED_BY" AS "DELETED_BY", 
+      "REQ_PANELS"."NOTES" AS "NOTES", 
+      "REQ_PANELS"."APPROVED_DATE" AS "APPROVED_DATE", 
+      "REQ_PANELS"."APPROVED_BY" AS "APPROVED_BY", 
+      "REQ_PANELS"."EXTERNAL_NO" AS "EXTERNAL_NO", 
+      "REQ_PANELS"."FAIL_TYPE" AS "FAIL_TYPE", 
+      "REQ_PANELS"."LD_REFLEX_RP_ID" AS "LD_REFLEX_RP_ID", 
+      "REQ_PANELS"."STAT" AS "STAT", 
+      "REQ_PANELS"."DELETE_REASON_NOTE" AS "DELETE_REASON_NOTE", 
+      "REQ_PANELS"."DX5" AS "DX5", 
+      "REQ_PANELS"."DX6" AS "DX6", 
+      "REQ_PANELS"."DX7" AS "DX7", 
+      "REQ_PANELS"."DX8" AS "DX8", 
+      "REQ_PANELS"."ACCEPTED_BY" AS "ACCEPTED_BY", 
+      "REQ_PANELS"."ACCEPTED_BY_ID" AS "ACCEPTED_BY_ID", 
+      "REQ_PANELS"."RUN_BY_ID" AS "RUN_BY_ID", 
+      "REQ_PANELS"."UNIT_COUNT" AS "UNIT_COUNT", 
+      "REQ_PANELS"."APPROVAL_REASON" AS "APPROVAL_REASON", 
+      "REQ_PANELS"."INTERNAL_NOTES" AS "INTERNAL_NOTES"
+      FROM "LENCO"."REQ_PANELS" "REQ_PANELS"</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="RL_REQUISITIONS" EntityType="Model.Store.RL_REQUISITIONS" store:Type="Views" store:Schema="LENCO" store:Name="RL_REQUISITIONS">
+      <DefiningQuery>SELECT 
+      "RL_REQUISITIONS"."ACC_ID" AS "ACC_ID", 
+      "RL_REQUISITIONS"."RL_ID" AS "RL_ID", 
+      "RL_REQUISITIONS"."BILL_TYPE" AS "BILL_TYPE", 
+      "RL_REQUISITIONS"."CLIENT_ID" AS "CLIENT_ID", 
+      "RL_REQUISITIONS"."IMPORT_NOTES" AS "IMPORT_NOTES", 
+      "RL_REQUISITIONS"."REMOTE_DRAW" AS "REMOTE_DRAW"
+      FROM "LENCO"."RL_REQUISITIONS" "RL_REQUISITIONS"</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'LENCO.REQ_PANELS' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="REQ_PANELS">
+    <Key>
+      <PropertyRef Name="RP_ID" />
+      <PropertyRef Name="DX1" />
+      <PropertyRef Name="DX2" />
+      <PropertyRef Name="DX3" />
+      <PropertyRef Name="DX4" />
+      <PropertyRef Name="DX5" />
+      <PropertyRef Name="DX6" />
+      <PropertyRef Name="DX7" />
+      <PropertyRef Name="DX8" />
+      <PropertyRef Name="UNIT_COUNT" />
+    </Key>
+    <Property Name="RP_ID" Type="number" Nullable="false" />
+    <Property Name="DEL_FLAG" Type="varchar2" MaxLength="1" />
+    <Property Name="APPROVAL_REQUIRED" Type="varchar2" MaxLength="1" />
+    <Property Name="ACC_ID" Type="number" />
+    <Property Name="SG_ID" Type="number" />
+    <Property Name="PANEL_ID" Type="number" />
+    <Property Name="DX1" Type="varchar2" Nullable="false" MaxLength="1" />
+    <Property Name="DX2" Type="varchar2" Nullable="false" MaxLength="1" />
+    <Property Name="DX3" Type="varchar2" Nullable="false" MaxLength="1" />
+    <Property Name="DX4" Type="varchar2" Nullable="false" MaxLength="1" />
+    <Property Name="LOC_ID" Type="number" />
+    <Property Name="RUN_DATE" Type="date" />
+    <Property Name="RUN_BY" Type="varchar2" MaxLength="3" />
+    <Property Name="UPLOADED" Type="varchar2" MaxLength="1" />
+    <Property Name="CREATED_DATE" Type="date" />
+    <Property Name="CREATED_BY" Type="number" />
+    <Property Name="DELETED_DATE" Type="date" />
+    <Property Name="DELETED_BY" Type="number" />
+    <Property Name="NOTES" Type="varchar2" />
+    <Property Name="APPROVED_DATE" Type="date" />
+    <Property Name="APPROVED_BY" Type="number" />
+    <Property Name="EXTERNAL_NO" Type="varchar2" MaxLength="20" />
+    <Property Name="FAIL_TYPE" Type="varchar2" MaxLength="1" />
+    <Property Name="LD_REFLEX_RP_ID" Type="number" />
+    <Property Name="STAT" Type="varchar2" MaxLength="1" />
+    <Property Name="DELETE_REASON_NOTE" Type="varchar2" />
+    <Property Name="DX5" Type="varchar2" Nullable="false" MaxLength="1" />
+    <Property Name="DX6" Type="varchar2" Nullable="false" MaxLength="1" />
+    <Property Name="DX7" Type="varchar2" Nullable="false" MaxLength="1" />
+    <Property Name="DX8" Type="varchar2" Nullable="false" MaxLength="1" />
+    <Property Name="ACCEPTED_BY" Type="varchar2" MaxLength="3" />
+    <Property Name="ACCEPTED_BY_ID" Type="number" />
+    <Property Name="RUN_BY_ID" Type="number" />
+    <Property Name="UNIT_COUNT" Type="number" Nullable="false" />
+    <Property Name="APPROVAL_REASON" Type="varchar2" MaxLength="30" />
+    <Property Name="INTERNAL_NOTES" Type="varchar2" />
+  </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'LENCO.RL_REQUISITIONS' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="RL_REQUISITIONS">
+    <Key>
+      <PropertyRef Name="ACC_ID" />
+      <PropertyRef Name="RL_ID" />
+    </Key>
+    <Property Name="ACC_ID" Type="number" Nullable="false" />
+    <Property Name="RL_ID" Type="number" Nullable="false" />
+    <Property Name="BILL_TYPE" Type="varchar2" MaxLength="1" />
+    <Property Name="CLIENT_ID" Type="varchar2" MaxLength="35" />
+    <Property Name="IMPORT_NOTES" Type="varchar2" />
+    <Property Name="REMOTE_DRAW" Type="varchar2" MaxLength="1" />
+  </EntityType>
+</Schema>

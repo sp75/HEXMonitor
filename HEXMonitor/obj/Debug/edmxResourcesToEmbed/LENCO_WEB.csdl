@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LENCO_WEBModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="LENCO_WEBEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="HEX_Requisitions" EntityType="LENCO_WEBModel.HEX_Requisitions" />
+    <EntitySet Name="HEX_Panels" EntityType="LENCO_WEBModel.HEX_Panels" />
+    <AssociationSet Name="FK_HEX_Panels_HEX_Requisitions" Association="LENCO_WEBModel.FK_HEX_Panels_HEX_Requisitions">
+      <End Role="HEX_Requisitions" EntitySet="HEX_Requisitions" />
+      <End Role="HEX_Panels" EntitySet="HEX_Panels" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="HEX_Requisitions">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int64" Name="acc_id" Nullable="false" />
+    <Property Type="DateTime" Name="date_processed" Precision="3" />
+    <Property Type="String" Name="patient_last_name" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="patient_first_name" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="requisition_date" Precision="3" />
+    <NavigationProperty Name="HEX_Panels" Relationship="LENCO_WEBModel.FK_HEX_Panels_HEX_Requisitions" FromRole="HEX_Requisitions" ToRole="HEX_Panels" />
+    <Property Name="hl7_data" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="HEX_Panels">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int64" Name="rp_id" Nullable="false" />
+    <Property Type="Int64" Name="acc_id" />
+    <Property Type="String" Name="panel_name" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="requisitions_id" />
+    <Property Type="String" Name="panel_id" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="HEX_Requisitions" Relationship="LENCO_WEBModel.FK_HEX_Panels_HEX_Requisitions" FromRole="HEX_Panels" ToRole="HEX_Requisitions" />
+  </EntityType>
+  <Association Name="FK_HEX_Panels_HEX_Requisitions">
+    <End Type="LENCO_WEBModel.HEX_Requisitions" Role="HEX_Requisitions" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="LENCO_WEBModel.HEX_Panels" Role="HEX_Panels" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HEX_Requisitions">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="HEX_Panels">
+        <PropertyRef Name="requisitions_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="LENCO_WEBModelStoreContainer" CdmEntityContainer="LENCO_WEBEntities">
+    <EntitySetMapping Name="HEX_Requisitions">
+      <EntityTypeMapping TypeName="LENCO_WEBModel.HEX_Requisitions">
+        <MappingFragment StoreEntitySet="HEX_Requisitions">
+          <ScalarProperty Name="hl7_data" ColumnName="hl7_data" />
+          <ScalarProperty Name="requisition_date" ColumnName="requisition_date" />
+          <ScalarProperty Name="patient_first_name" ColumnName="patient_first_name" />
+          <ScalarProperty Name="patient_last_name" ColumnName="patient_last_name" />
+          <ScalarProperty Name="date_processed" ColumnName="date_processed" />
+          <ScalarProperty Name="acc_id" ColumnName="acc_id" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HEX_Panels">
+      <EntityTypeMapping TypeName="LENCO_WEBModel.HEX_Panels">
+        <MappingFragment StoreEntitySet="HEX_Panels">
+          <ScalarProperty Name="panel_id" ColumnName="panel_id" />
+          <ScalarProperty Name="requisitions_id" ColumnName="requisitions_id" />
+          <ScalarProperty Name="panel_name" ColumnName="panel_name" />
+          <ScalarProperty Name="acc_id" ColumnName="acc_id" />
+          <ScalarProperty Name="rp_id" ColumnName="rp_id" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
