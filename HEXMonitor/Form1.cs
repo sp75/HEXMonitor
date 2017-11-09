@@ -49,9 +49,9 @@ namespace HEXMonitor
                     rq.PI_ID1,
                     rq.PI_ID2,
                     rq.PI_ID3,
-                    p.F_NAME,
-                    p.L_NAME,
-                    p.M_NAME ,
+                    UPPER(p.F_NAME) F_NAME,
+                    UPPER(p.L_NAME) L_NAME,
+                    UPPER(p.M_NAME) M_NAME,
                     p.BIRTH,
                     p.GENDER,
                     p.ADDRESS1,
@@ -63,9 +63,9 @@ namespace HEXMonitor
                     p.H_PHONE,
                     p.MARITAL_STATUS,
                     d.DOC_ID,
-                    d.F_NAME as D_F_NAME,
-                    d.L_NAME as D_L_NAME,
-                    d.M_NAME as D_M_NAME,
+                    UPPER(d.F_NAME) as D_F_NAME,
+                    UPPER(d.L_NAME) as D_L_NAME,
+                    UPPER(d.M_NAME) as D_M_NAME,
                     d.ADDRESS1 as D_ADDRESS1
 
                 FROM requisitions rq  
