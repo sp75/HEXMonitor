@@ -41,6 +41,9 @@
     <Reference Include="DocumentFormat.OpenXml.ReportBuilder">
       <HintPath>lib\DocumentFormat.OpenXml.ReportBuilder.dll</HintPath>
     </Reference>
+    <Reference Include="Elf">
+      <HintPath>lib\Elf.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>

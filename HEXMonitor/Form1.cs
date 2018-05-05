@@ -13,6 +13,7 @@ using System.Windows.Forms;
 using System.IO.Compression;
 using FormulaExcel;
 using DocumentFormat.OpenXml.ReportBuilder;
+using Elf.Data;
 
 namespace HEXMonitor
 {
@@ -72,13 +73,32 @@ namespace HEXMonitor
                 inner join PATIENTS p on rq.PAT_ID = p.PAT_ID
                 inner join  DOCTORS d on rq.DOC_ID1 = d.DOC_ID
                 
-                WHERE rq.DEL_FLAG='F' and rq.CREATED_DATE BETWEEN SYSDATE - {0} and SYSDATE 
-                and ( exists (select rp.rp_id from RL_REQ_PANELS rp, RL_RESULTS res where rp.rp_id = res.rp_id and  rq.acc_id = rp.acc_id and res.STATUS='F' )
-                     or exists (select rp.rp_id from REQ_PANELS rp, RESULTS res where rp.rp_id = res.rp_id and  rq.acc_id = rp.acc_id  )
-                    ) 
+                WHERE rq.DEL_FLAG='F' and rq.CREATED_DATE BETWEEN GETDATE() - {0} and GETDATE()
+                and  exists ( 
+                
+           select top 1 x.* from 
+           (
+                select rp.ACC_ID, rp.RP_ID
+                from RL_REQ_PANELS rp
+                inner join requisitions rq  on rq.acc_id = rp.ACC_ID
+                inner join RL_RESULTS res on res.rp_id = rp.rp_id and res.DEL_FLAG='F'
+                where rp.DEL_FLAG='F' and rq.DEL_FLAG='F' and rq.CREATED_DATE BETWEEN GETDATE() - {0} and GETDATE()
+
+                union all
+                select rp.ACC_ID, rp.RP_ID
+                from REQ_PANELS rp
+                inner join requisitions rq  on rq.acc_id = rp.ACC_ID
+                inner join PANELS p on rp.PANEL_ID = p.PANEL_ID
+                inner join RESULTS res on  res.rp_id = rp.rp_id and res.DEL_FLAG='F'
+                where rp.DEL_FLAG='F' and rq.CREATED_DATE BETWEEN GETDATE() - {0} and GETDATE()
+          ) x
+          left outer join LENCO_WEB.dbo.HEX_Panels hex_p on hex_p.rp_id = x.RP_ID
+          where  hex_p.id is null  and x.ACC_ID = rq.ACC_ID
+                
+                 )
                 order by rq.PAT_ID ";
 
-            string sql_panels = @"  select rp.RP_ID, rp.PROFILE_NAME as PANEL_NAME,rp.PROFILE_ID PANEL_ID, rp.CREATED_DATE, min(cpt.CPT_ID) CPT_ID, count(res.rp_id ) count_test
+        /*    string sql_panels = @"  select rp.RP_ID, rp.PROFILE_NAME as PANEL_NAME,rp.PROFILE_ID PANEL_ID, rp.CREATED_DATE, min(cpt.CPT_ID) CPT_ID, count(res.rp_id ) count_test
                 from RL_REQ_PANELS rp
                 inner join RL_RESULTS res on res.rp_id = rp.rp_id and res.DEL_FLAG='F'
                 left outer join RL_REQ_PANEL_CPTS cpt on rp.RP_ID = cpt.RP_ID
@@ -93,20 +113,51 @@ namespace HEXMonitor
                 inner join RESULTS res on  res.rp_id = rp.rp_id and res.DEL_FLAG='F'
                 left outer join REQ_PANEL_CPTS cpt on rp.RP_ID = cpt.RP_ID
                 where rp.DEL_FLAG='F' and rp.ACC_ID  = {0} 
-                group by rp.RP_ID, p.PANEL_NAME,rp.PANEL_ID, rp.CREATED_DATE";
+                group by rp.RP_ID, p.PANEL_NAME,rp.PANEL_ID, rp.CREATED_DATE";*/
+
+            string sql_panels = @"
+               select x.* from 
+        (
+        
+                select rp.ACC_ID, rp.RP_ID, rp.PROFILE_NAME as PANEL_NAME,rp.PROFILE_ID PANEL_ID, rp.CREATED_DATE, min(cpt.CPT_ID) CPT_ID, count(res.rp_id ) count_test
+                from RL_REQ_PANELS rp
+                inner join requisitions rq  on rq.acc_id = rp.ACC_ID
+                inner join RL_RESULTS res on res.rp_id = rp.rp_id and res.DEL_FLAG='F'
+                left outer join RL_REQ_PANEL_CPTS cpt on rp.RP_ID = cpt.RP_ID
+                where rp.DEL_FLAG='F' and rq.DEL_FLAG='F' and rq.CREATED_DATE BETWEEN GETDATE() - {0} and GETDATE() 
+                group by rp.ACC_ID, rp.RP_ID, rp.PROFILE_NAME,rp.PROFILE_ID, rp.CREATED_DATE
+             
+                union all
+             
+                select rp.ACC_ID, rp.RP_ID, p.PANEL_NAME, cast( rp.PANEL_ID as varchar (20)) PANEL_ID, rp.CREATED_DATE, min(cpt.CPT_ID) CPT_ID, count(res.rp_id ) count_test
+                from REQ_PANELS rp
+                inner join requisitions rq  on rq.acc_id = rp.ACC_ID
+                inner join PANELS p on rp.PANEL_ID = p.PANEL_ID
+                inner join RESULTS res on  res.rp_id = rp.rp_id and res.DEL_FLAG='F'
+                left outer join REQ_PANEL_CPTS cpt on rp.RP_ID = cpt.RP_ID
+                where rp.DEL_FLAG='F' and rq.CREATED_DATE BETWEEN GETDATE() - {0} and GETDATE()
+                group by rp.ACC_ID, rp.RP_ID, p.PANEL_NAME,rp.PANEL_ID, rp.CREATED_DATE
+          ) x
+          left outer join LENCO_WEB.dbo.HEX_Panels hex_p on hex_p.rp_id = x.RP_ID
+          where  hex_p.id is null";
+
+            
 
             int msg_count = 0;
 
-            using (var lab = new LabdaqClient())
-            {
+      //      using (var lab = new LabdaqClient())
+      //      {
                 int step = 0;
                 var d = DateTime.Now;
-                List<Dictionary<string, object>> Req = lab.RunSql(String.Format(sql_orders, LastDays.Text), -1);
+              //  List<Dictionary<string, object>> Req = lab.RunSql(String.Format(sql_orders, LastDays.Text), -1);
+                var Req = new Proc(String.Format(sql_orders, LastDays.Text), "labdaq_mssql").All();
                 int count_req = Req.Count();
+               // var panels_list = lab.RunSql(String.Format(sql_panels, LastDays.Text), -1);
+                var panels_list = new Proc(String.Format(sql_panels, LastDays.Text), "labdaq_mssql").All();
 
                 using (var db = new LENCO_WEBEntities())
                 {
-                    foreach (Dictionary<string, object> row in Req)
+                    foreach (var row in Req)
                     {
                         string ACC_ID = row["ACC_ID"].ToString();
                         string hl7_str = "";
@@ -124,7 +175,7 @@ namespace HEXMonitor
 
                         int count = 0;
                         StringBuilder sb_pan = new StringBuilder();
-                        List<Dictionary<string, object>> panels = lab.RunSql(String.Format(sql_panels, row["ACC_ID"]), -1);
+                        var panels = panels_list.Where(w => w["ACC_ID"].ToString() == row["ACC_ID"].ToString()).ToList();
 
                         if (panels.Any(a => a["PANEL_ID"].ToString() == "580") && panels.Any(a => a["PANEL_ID"].ToString() == "6700"))
                         {
@@ -155,9 +206,7 @@ namespace HEXMonitor
 
                         if (count > 0)
                         {
-                            //  sw.Write(HL7(lab, row));
-                            //  sw.Write(sb_pan.ToString());
-                            hl7_str += HL7(lab, row);
+                            hl7_str += HL7( row);
                             hl7_str += sb_pan.ToString();
 
                             req.hl7_data = hl7_str;
@@ -191,7 +240,7 @@ namespace HEXMonitor
                 }
 
                 label2.Text = d.ToString();
-            }
+        //    }
 
             button1.Enabled = true;
             progressBar1.Visible = false;
@@ -208,18 +257,17 @@ namespace HEXMonitor
             try
             {
                 MailMessage mail = new MailMessage();
-                SmtpClient SmtpServer = new SmtpClient("mail.authsmtp.com");
+                SmtpClient SmtpServer = new SmtpClient("email-smtp.us-east-1.amazonaws.com");
 
                 mail.From = new MailAddress("info@lencolab.com");
-            //    mail.To.Add("sergeyp@4ib.com"); 
+       //         mail.To.Add("sergeyp@4ib.com"); 
                 mail.To.Add("felix@lencolab.com"); 
                 mail.Subject = "HEX Monitor";
                 mail.CC.Add("sergeyp@4ib.com");
                 mail.Body = Body;
 
-                SmtpServer.Port = 2525;
-                SmtpServer.Credentials = new System.Net.NetworkCredential("ac60691", "fargsga8ptbnun");
-               // SmtpServer.EnableSsl = true;
+                SmtpServer.Credentials = new System.Net.NetworkCredential("AKIAIHH5JEQU7VIBXP5A", "Ap5EFIzV5+iUGdyg7QWfuWYgMESNLVzuwy6rwzA7Ho1w");
+                SmtpServer.EnableSsl = true;
 
                if (attachmentFilename != null)
                 {
@@ -255,7 +303,14 @@ namespace HEXMonitor
             var dt = DateTime.Now;
             if (dt.Minute == dateTimePicker1.Value.Minute && dt.Hour == dateTimePicker1.Value.Hour && dt.Second == dateTimePicker1.Value.Second)
             {
-                button1.PerformClick();
+                try
+                {
+                    button1.PerformClick();
+                }
+                catch
+                {
+
+                }
             }
         }
 
@@ -264,7 +319,7 @@ namespace HEXMonitor
             Properties.Settings.Default.Save();
         }
 
-        private String HL7(LabdaqClient lc, Dictionary<string, object> pat)
+        private String HL7(Dictionary<string, object> pat)
         {
             var dt = DateTime.Now;
             StringBuilder sb = new StringBuilder();
@@ -277,7 +332,7 @@ namespace HEXMonitor
                 pat["STATE"], pat["ZIP"], pat["H_PHONE"].ToString().Replace("(", "").Replace(")", "").Replace("-", ""), pat["MARITAL_STATUS"], pat["SSN"].ToString().Replace("-","")));
 
             int idx = 0;
-            foreach (var item in GetIns(lc, pat))
+            foreach (var item in GetIns(pat))
             {
                 string EFFECTIVE_DATE = String.IsNullOrEmpty(item["EFFECTIVE_DATE"].ToString()) ? "" : DateTime.Parse(item["EFFECTIVE_DATE"].ToString()).ToString("yyyyMMdd");
 
@@ -311,7 +366,7 @@ namespace HEXMonitor
             return sb.ToString();
         }
 
-        private List<Dictionary<string, object>> GetIns(LabdaqClient lc, Dictionary<string, object> pat)
+        private JsonTable GetIns(Dictionary<string, object> pat)
         {
             string sql = @"select p.*, ins.INS_NAME  from PAT_INSURANCE p
                            inner join INS_COMPANIES ins ON p.INS_ID = ins.INS_ID 
@@ -320,7 +375,7 @@ namespace HEXMonitor
 
             sql = String.Format(sql, pat["PAT_ID"], !String.IsNullOrEmpty(pat["PI_ID1"].ToString()) ? pat["PI_ID1"] : -1, !String.IsNullOrEmpty(pat["PI_ID2"].ToString()) ? pat["PI_ID2"] : -1, !String.IsNullOrEmpty(pat["PI_ID3"].ToString()) ? pat["PI_ID3"] : -1);
 
-            return lc.RunSql(sql, -1);
+            return new Proc(sql, "labdaq_mssql").All();
         }
 
         private void button2_Click(object sender, EventArgs e)
