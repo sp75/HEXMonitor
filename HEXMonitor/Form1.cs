@@ -266,7 +266,7 @@ namespace HEXMonitor
                 mail.CC.Add("sergeyp@4ib.com");
                 mail.Body = Body;
 
-                SmtpServer.Credentials = new System.Net.NetworkCredential("AKIAIHH5JEQU7VIBXP5A", "Ap5EFIzV5+iUGdyg7QWfuWYgMESNLVzuwy6rwzA7Ho1w");
+                SmtpServer.Credentials = new System.Net.NetworkCredential("AKIAINZASWZSCQKEPZNA", "AoC/+GXMq2lDf1Vh2teYAPGNS+cQ+dGN/hJfb8D/ISyv");
                 SmtpServer.EnableSsl = true;
 
                if (attachmentFilename != null)
